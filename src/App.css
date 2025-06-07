@@ -1,0 +1,302 @@
+/* === Global Color Variables === */
+:root {
+
+  --purple-2: rgb(26, 26, 51);
+
+
+
+  --gold-1: rgb(255, 206, 1);
+
+}
+
+/* === Layout === */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--purple-2);
+  overflow: hidden;
+  /* Prevent scrolling, zooming, or pinching */
+  touch-action: none;
+  border: 1vmin solid var(--gold-1);
+  /* Scalable yellow border */
+  box-sizing: border-box;
+  /* Ensure border is included in measurements */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  position: absolute;
+  /* Anchor the grid */
+  top: 1vmin;
+  /* Account for yellow border */
+  left: 1vmin;
+  /* Account for yellow border */
+  width: calc(100vmin - 2vmin);
+  /* Account for yellow border */
+  height: calc(100vmin - 2vmin);
+  /* Account for yellow border */
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  background-color: var(--purple-2);
+  outline: 1px dotted red;
+  /* Debugging outline */
+}
+
+.tile {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px dotted red;
+}
+
+/* === Control Panel === */
+.control-panel {
+  display: grid;
+  grid-template-rows: repeat(6, auto);
+
+  grid-template-columns: repeat(3, auto);
+
+  gap: 1vh;
+
+  width: calc(100vw - 4vmin);
+  /* Adjust width to avoid overlapping the border */
+  position: absolute;
+  /* Position relative to the grid */
+  top: calc(100vmin - 2vmin + 2vh);
+  /* Add spacing below the grid */
+  left: 2vmin;
+  /* Add more spacing from the left edge */
+  padding: 3vw;
+  /* Increased padding around the control panel */
+  box-sizing: border-box;
+  /* Ensure padding is included in measurements */
+}
+
+/* First square as flex container */
+.control-panel .flex-container {
+  grid-row: 1 / 2;
+  /* First row */
+  grid-column: 1 / 2;
+  /* First column */
+  display: flex;
+  /* Enable flexbox */
+  flex-direction: column;
+  /* Stack buttons vertically */
+  align-items: center;
+  /* Center buttons horizontally */
+  justify-content: space-around;
+  /* Space buttons evenly */
+
+  padding: 1rem;
+  /* Add padding inside the flex container */
+  border: 2px solid white;
+  /* Optional border for visibility */
+}
+
+button {
+  padding: 1vh 2vw;
+  margin: 0.5vh 0;
+  font-size: 1.75vh;
+  /* Scalable font size */
+  color: rgb(29, 17, 17);
+  border: 2px solid var(--gold-1);
+  border-radius: 0.5vh;
+  /* Scalable border radius */
+  cursor: pointer;
+  background-color: #FF0000;
+  background: linear-gradient(59deg, rgba(252, 176, 69, 1) 0%, rgba(58, 111, 180, 1) 0%, rgba(58, 111, 180, 1) 0%, rgba(0, 0, 255, 1) 49%, rgba(58, 111, 180, 1) 0%, rgba(255, 0, 0, 1) 88%);
+  transition: background 0.3s ease, transform 0.2s ease;
+  /* Smooth hover effect */
+}
+
+button:hover {
+  background: #0000FF;
+  background:
+
+    transform: scale(1.05);
+  /* Slight zoom effect */
+}
+
+button.mode-btn {
+  min-width: 80px;
+  min-height: 30px;
+
+
+  grid-row: 1 / 4;
+  background: linear-gradient(59deg,
+      rgb(0, 0, 255),
+      /* pure blue */
+      rgba(58, 111, 180, 1) 88%,
+      /* blue shade */
+      rgba(255, 0, 0, 0.49)
+      /* semi-transparent red */
+    );
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.reset-btn {
+  min-width: 80px;
+  min-height: 30px;
+
+  grid-row: 1/5;
+  background-color: white;
+}
+
+buton.mode-btn:hover {
+  background: rgba(0, 0, 255, 1);
+  transform: scale(1.15);
+}
+
+button.rot-btn {
+  grid-row: 1 / 2;
+  /* Top row */
+  grid-column: 2 / 3;
+  /* Center column */
+  width: 90%;
+  /* Adjust width to take up space */
+  margin: 0 auto;
+  /* Center horizontally */
+  min-height: calc(37.5%);
+  /* Minimum height is 3/8 of the control panel */
+  max-height: calc(37.5%);
+  /* Maximum height is 3/8 of the control panel */
+}
+
+.slider-container {
+
+  /* Center column */
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  align-content: space-around;
+  justify-content: space-around;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 1.5vh;
+  /* Scalable height */
+  background: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255));
+  border-radius: 0.5vh;
+  /* Scalable border radius */
+  outline: white;
+  border: 0.2vh black box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.5);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2vh;
+  /* Scalable thumb size */
+  height: 2vh;
+  background: rgb(255, 255, 255);
+  border: 0.2vh solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 2vh;
+  height: 2vh;
+  background: var(--gold-1);
+  border: 0.2vh solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Vertical lines for notches */
+.slider-container .notch {
+  position: absolute;
+  top: 50%;
+  width: 0.2vh;
+  /* Scalable width */
+  height: 2vh;
+  /* Scalable height */
+  background: black;
+  transform: translateY(-50%);
+}
+
+.slider-container .notch:nth-child(1) {
+  left: 20%;
+}
+
+.slider-container .notch:nth-child(2) {
+  left: 40%;
+}
+
+.slider-container .notch:nth-child(3) {
+  left: 60%;
+}
+
+.slider-container .notch:nth-child(4) {
+  left: 80%;
+}
+
+button.fire-btn {
+  grid-row: 1 / 5;
+  grid-column: 3 / 3;
+  padding: 1vh 2vw;
+  max-height: 80px;
+  min-height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+
+
+}
+
+button.fire-btn:hover {
+  background: #FCB045;
+  background-color: #FF0000;
+  background: 1) 100%);
+  transform: scale(1.25);
+
+}
+
+/* Landscape layout */
+@media (orientation: landscape) {
+  .app-container {
+    flex-direction: row;
+  }
+
+  .grid {
+    top: 1vmin;
+    /* Anchor at top */
+    left: 1vmin;
+    /* Anchor at left */
+  }
+
+  .control-panel {
+    top: 1vmin;
+    /* Align with grid's top edge */
+    left: calc(100vmin - 2vmin);
+    /* To the right of the grid */
+    width: calc(100vw - 100vmin);
+    /* Fill remaining space beside the grid */
+    height: calc(100vmin - 2vmin);
+    /* Match grid height */
+    padding: 3vw;
+    /* Ensure consistent padding */
+    box-sizing: border-box;
+    /* Include padding in measurements */
+  }
+
+  button {
+    font-size: 1.5vh;
+    /* Maintain scalable font size */
+    padding: 1vh 2vw;
+    /* Maintain scalable padding */
+  }
+}
