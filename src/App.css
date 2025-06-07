@@ -12,8 +12,13 @@
 /* === Global Gradient Variables === */
 :root {
   --button-gradient: linear-gradient(59deg, rgba(58, 111, 180, 1) 0%, rgba(0, 0, 255, 1) 0%, rgba(58, 111, 180, 1) 0%, rgba(255, 0, 0, 1) 18%, rgba(197, 25, 25, 1) 22%, rgba(197, 25, 25, 1) 14%, rgba(95, 186, 211, 1) 100%);
-  --button-hover-gradient: linear-gradient(59deg, rgba(58, 111, 180, 1) 0%, rgba(0, 0, 255, 1) 0%, rgba(58, 111, 180, 1) 0%, rgba(255, 0, 0, 1) 82%, rgba(197, 25, 25, 1) 22%, rgba(197, 25, 25, 1) 14%, rgba(95, 186, 211, 1) 100%);
-  --slider-gradient: linear-gradient(59deg, rgba(58, 111, 180, 1) 0%, rgba(0, 0, 255, 1) 0%, rgba(58, 111, 180, 1) 0%, rgba(255, 0, 0, 1) 18%, rgba(197, 25, 25, 1) 22%, rgba(197, 25, 25, 1) 14%, rgba(95, 186, 211, 1) 100%);
+  --button-hover-gradient: linear-gradient(59deg, rgba(58, 111, 180, 1) 0%, rgba(0, 0, 255, 1) 50%, rgba(255, 0, 0, 1) 100%);
+}
+
+/* === Global Font Style === */
+:root {
+  --naval-font: "Courier New", "Monaco", "Consolas", monospace;
+  /* Naval-style font */
 }
 
 /* === Layout === */
@@ -189,12 +194,15 @@ button.rot-btn {
   appearance: none;
   width: 80%;
   height: 1.5vh;
-  /* Scalable height */
-  background: var(--slider-gradient); /* Apply the gradient to the slider background */
+  background: var(--slider-gradient);
+  /* Apply the gradient to the slider background */
   border-radius: 0.5vh;
   /* Scalable border radius */
   outline: white;
-  border: 0.2vh black box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.5);
+  border: 0.2vh solid black;
+  /* Corrected border property */
+  box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.5);
+  /* Corrected box-shadow property */
 }
 
 .slider::-webkit-slider-thumb {
@@ -212,7 +220,8 @@ button.rot-btn {
 .slider::-moz-range-thumb {
   width: 2vh;
   height: 2vh;
-  background: white; /* Keep the thumb distinct */
+  background: white;
+  /* Keep the thumb distinct */
   border: 0.2vh solid black;
   border-radius: 50%;
   cursor: pointer;
@@ -247,35 +256,81 @@ button.rot-btn {
 }
 
 button.fire-btn {
-  grid-row: 1 / 5;
-  grid-column: 3 / 3;
+  background: var(--button-gradient);
+  color: white;
+  border: 2px solid #0056b3;
+  border-radius: 0.5vh;
   padding: 1vh 2vw;
-  max-height: 80px;
-  min-height: 80px;
-  min-width: 80px;
-  min-height: 80px;
-
-
-}
-
-button.fire-btn:hover {
-  background: #FCB045;
-  background-color: #FF0000;
-  background: 1) 100%);
-  transform: scale(1.25);
-
-}
-
-button.anchor-btn {
-  background-color: #007BFF; /* Blue background for anchor mode */
-  color: white; /* White text */
-  border: 2px solid #0056b3; /* Darker blue border */
+  margin: 0.5vh 0;
+  font-size: 1.75vh;
+  cursor: pointer;
+  position: relative;
+  /* Enable positioning for child elements */
+  overflow: hidden;
+  /* Ensure the silhouette doesn't overflow the button */
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button.anchor-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.1); /* Slight zoom effect */
+button.fire-btn:hover {
+  background: var(--button-hover-gradient);
+  transform: scale(1.1);
+}
+
+/* Missile Silhouette */
+button.fire-btn::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  /* Start off-screen at the bottom */
+  left: -50%;
+  /* Start off-screen at the left */
+  width: 100%;
+  /* Twice the original size */
+  height: 100%;
+  /* Twice the original size */
+  background: url("/assets/missile.png") no-repeat center;
+  background-size: contain;
+  opacity: 0;
+  /* Hidden by default */
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+button.fire-btn:hover::before {
+  opacity: 1;
+  /* Reveal on hover */
+  animation: missile-enter 0.5s ease forwards;
+  /* Trigger animation */
+}
+
+/* Keyframes for Missile Animation */
+@keyframes missile-enter {
+  0% {
+    top: 100%;
+    /* Start at the bottom */
+    left: -50%;
+    /* Start at the left */
+    opacity: 0;
+    /* Fully hidden */
+  }
+
+  50% {
+    top: 50%;
+    /* Move halfway up */
+    left: 25%;
+    /* Move closer to the center */
+    opacity: 0.5;
+    /* Partially visible */
+  }
+
+  100% {
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    opacity: 1;
+    /* Fully visible */
+  }
 }
 
 /* Landscape layout */
@@ -312,4 +367,65 @@ button.anchor-btn:hover {
     padding: 1vh 2vw;
     /* Maintain scalable padding */
   }
+}
+
+.info-box {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.slider-value.hover {
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+}
+
+/* Info Block 1 */
+.info-box-1 {
+  grid-row: 2 / 3;
+  /* Row 2 */
+  grid-column: 1 / 2;
+  /* Column 1 */
+  background-color: black;
+  /* Black background */
+  color: white;
+  /* White text */
+  font-family: var(--naval-font);
+  /* Apply naval-style font */
+  font-size: 2vh;
+  /* Increased font size */
+  font-weight: 900;
+  /* Super bold text */
+  padding: 1rem;
+  /* Add padding inside the block */
+  box-sizing: border-box;
+  /* Include padding in measurements */
+  border: 1px solid white;
+  /* Optional border for visibility */
+}
+
+/* Info Block 2 */
+.info-box-2 {
+  grid-row: 2 / 3;
+  /* Row 2 */
+  grid-column: 2 / 3;
+  /* Column 2 */
+  background-color: black;
+  /* Black background */
+  color: white;
+  /* White text */
+  font-family: var(--naval-font);
+  /* Apply naval-style font */
+  font-size: 2vh;
+  /* Increased font size */
+  font-weight: 900;
+  /* Super bold text */
+  padding: 1rem;
+  /* Add padding inside the block */
+  box-sizing: border-box;
+  /* Include padding in measurements */
+  border: 1px solid white;
+  /* Optional border for visibility */
 }
