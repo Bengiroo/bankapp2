@@ -2,7 +2,7 @@ import React from "react";
 import "./Grid.css";
 
 export default function Grid({ mode }) {
-  const tileImage = mode === "offense" ? "/assets/a.png" : "/assets/b.png";
+  const tileImage = mode === "offense" ? "/assets/b.png" : "/assets/a.png";
 
   return (
     <div className="grid">
